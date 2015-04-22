@@ -69,11 +69,11 @@ def migrateMail(options):
     if (options.listFoldersOnly):
         print "Source Folders:"
         for folder in source_account.list_folders():
-            status = "[Migreated Directly]"
+            status = "[Migrated Directly]"
             if source_account.is_ignored(folder):
                 status = "[Ignored]"
             if source_account.map_target_folder(folder):
-                status = "[Migreated to: " + source_account.map_target_folder(folder) + "]"
+                status = "[Migrated to: " + source_account.map_target_folder(folder) + "]"
             print "    {0:20} : {1}".format(folder, status)
         print "\nDestination Folders:"
         for folder in target_account.list_folders():
