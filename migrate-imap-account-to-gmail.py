@@ -16,7 +16,8 @@ SOURCE = {
     'SSL': True,
     'IGNORE_FOLDERS': ('[Gmail]',
                        '[Gmail]/Trash', '[Gmail]/Spam',
-                       '[Gmail]/Starred', '[Gmail]/Important')
+                       '[Gmail]/Starred', '[Gmail]/Important'),
+    'FOLDER_MAPPING': {'INBOX.Urgent': '[Gmail]/Important'}
 }
 
 TARGET = {
