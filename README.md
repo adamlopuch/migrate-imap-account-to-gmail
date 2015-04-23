@@ -6,8 +6,9 @@ account. By default, it preserves source account folder structure and saves
 the mail under a configurable root folder in target account (set
 `TARGET['ROOT_FOLDER']`). Folders can be skipped by listing them in
 `SOURCE['IGNORE_FOLDERS']`, or mapped to an alternative target folder by
-listing them in `SOURCE['FOLDER_MAPPING']. Tracks migration in database so
-that migration will continue from the last seen message in case of
+listing them in `SOURCE['FOLDER_MAPPING']`. Migrated mail keeps the same flags
+as the source message (e.g. seen/unseen, forwarded, etc.). Tracks migration in
+database so that migration will continue from the last seen message in case of
 interruption or when new mail needs to be synchronized from the source account.
 
 Tested with Dovecot to Gmail and Gmail to Gmail email migration.

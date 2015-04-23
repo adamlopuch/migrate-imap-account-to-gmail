@@ -151,13 +151,21 @@ class Source(Base):
         return self.server.search(['NOT DELETED'])
 
     def fetch_message(self, message_id):
+        # get flags state before fetching content (RFC822)
+        preflags = self.server.get_flags(message_id)
+
         response = self.server.fetch((message_id,),
                 ['FLAGS', 'RFC822', 'RFC822.SIZE', 'INTERNALDATE'],
                 do_decode=False)
         if options.verbose: print str(len(response)) + " : " + str(message_id)
 #        assert len(response) == 1
         data = response[message_id]
-        return (data['RFC822'], data['FLAGS'],
+
+        # reset flags to 'preflags' state
+        postflags = self.server.set_flags(message_id, preflags[message_id])
+
+        # return preflags instead of response flags (response flags mark all mail as seen)
+        return (data['RFC822'], preflags[message_id],
                 data['RFC822.SIZE'], data['INTERNALDATE'])
 
     def delete_message(self, message_id):
