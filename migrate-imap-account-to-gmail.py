@@ -94,6 +94,12 @@ def migrateMail(options):
             folder_info = source_account.select_folder(folder)
             if options.verbose: print("\tcontains %s messages" % folder_info['EXISTS'])
             for message_id in source_account.fetch_message_ids():
+
+                # check whether message already seen/stored in SQLlite
+                if db.is_message_seen(message_id, target_folder):
+                    print("\t\tskipping message '%s', already uploaded to '%s'" % (message_id, target_folder))
+                    continue
+
                 msg, flags, size, date = source_account.fetch_message(message_id)
                 if options.verbose: print("\t\tuploading message '%s' of %s bytes to '%s'" %
                         (message_id, size, target_folder))
