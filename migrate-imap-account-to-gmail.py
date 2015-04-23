@@ -96,7 +96,7 @@ def migrateMail(options):
             for message_id in source_account.fetch_message_ids():
 
                 # check whether message already seen/stored in SQLlite
-                if db.is_message_seen(target_folder, message_id):
+                if db.is_message_seen(message_id, target_folder):
                     print("\t\tskipping message '%s', already uploaded to '%s'" % (message_id, target_folder))
                     continue
 
